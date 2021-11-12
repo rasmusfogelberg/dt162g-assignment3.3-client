@@ -1,0 +1,337 @@
+<!-- 
+  -- A basic html index-file just to show that the web service
+  -- can be used by a client
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Courses</title>
+    <link
+      href="https://unpkg.com/@tailwindcss/custom-forms/dist/custom-forms.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      #add-course.open::after {
+        content: "Add new course ▲";
+      }
+      #add-course::after {
+        content: "Add new course ▼";
+      }
+    </style>
+  </head>
+
+  <body class="bg-gray-200 overflow-y-scroll overflow-hidden">
+    <h1 class="text-7xl text-center mt-5 font-bold">
+      Assignment 3.3 - Course listing
+    </h1>
+    <div class="flex justify-center">
+      <button
+        id="add-course"
+        class="
+          py-2
+          px-4
+          mt-10
+          mb-10
+          border border-transparent
+          shadow-sm
+          text-sm
+          font-medium
+          rounded-md
+          text-white
+          bg-indigo-600
+          hover:bg-indigo-700
+          focus:outline-none
+          focus:ring-2
+          focus:ring-offset-2
+          focus:ring-indigo-500
+        "
+      ></button>
+    </div>
+
+    <!-- Add course form -->
+    <div id="add-course-wrapper" class="mt-10 sm:mt-0 sr-only">
+      <div class="md:grid md:grid-cols-4 md:gap-6">
+        <div class="mt-5 md:mt-0 col-start-2 col-span-2 mb-10">
+          <form action="#" method="POST">
+            <div class="shadow overflow-hidden sm:rounded-md">
+              <div class="px-4 py-5 bg-white sm:p-6">
+                <div class="grid grid-cols-6 gap-6">
+                  <div class="col-span-6 sm:col-span-3">
+                    <label
+                      for="code"
+                      class="block text-sm font-medium text-gray-700"
+                      >Course code</label
+                    >
+                    <input
+                      type="text"
+                      required
+                      name="code"
+                      id="code"
+                      class="
+                        px-2
+                        py-2
+                        mt-1
+                        focus:ring-indigo-500 focus:border-indigo-500
+                        block
+                        w-full
+                        shadow-sm
+                        sm:text-sm
+                        border-indigo-700 border
+                        rounded-md
+                      "
+                    />
+                    <span
+                      class="
+                        hidden
+                        flex
+                        items-center
+                        font-medium
+                        tracking-wide
+                        text-red-500 text-xs
+                        mt-1
+                        ml-1
+                      "
+                    >
+                      * Required field
+                    </span>
+                  </div>
+
+                  <div class="col-span-6 sm:col-span-3">
+                    <label
+                      for="name"
+                      class="block text-sm font-medium text-gray-700"
+                      >Course name</label
+                    >
+                    <input
+                      type="text"
+                      required
+                      name="name"
+                      id="name"
+                      class="
+                        px-2
+                        py-2
+                        mt-1
+                        focus:ring-indigo-500 focus:border-indigo-500
+                        block
+                        w-full
+                        shadow-sm
+                        sm:text-sm
+                        border-indigo-700 border
+                        rounded-md
+                      "
+                    />
+                    <span
+                      class="
+                        hidden
+                        flex
+                        items-center
+                        font-medium
+                        tracking-wide
+                        text-red-500 text-xs
+                        mt-1
+                        ml-1
+                      "
+                    >
+                      * Required field
+                    </span>
+                  </div>
+
+                  <div class="col-span-6 sm:col-span-4">
+                    <label
+                      for="semester"
+                      class="block text-sm font-medium text-gray-700"
+                      >Semester</label
+                    >
+                    <input
+                      type="text"
+                      required
+                      name="semester"
+                      id="semester"
+                      class="
+                        px-2
+                        py-2
+                        mt-1
+                        focus:ring-indigo-500 focus:border-indigo-500
+                        block
+                        w-full
+                        shadow-sm
+                        sm:text-sm
+                        border-indigo-700
+                        rounded-md
+                        border
+                      "
+                    />
+                    <span
+                      class="
+                        hidden
+                        flex
+                        items-center
+                        font-medium
+                        tracking-wide
+                        text-red-500 text-xs
+                        mt-1
+                        ml-1
+                      "
+                    >
+                      * Required field
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="px-4 py-3 bg-white text-right sm:px-6">
+                <button
+                  type="submit"
+                  class="
+                    inline-flex
+                    justify-center
+                    py-2
+                    px-4
+                    border border-transparent
+                    shadow-sm
+                    text-sm
+                    font-medium
+                    rounded-md
+                    text-white
+                    bg-indigo-600
+                    hover:bg-indigo-700
+                    focus:outline-none
+                    focus:ring-2
+                    focus:ring-offset-2
+                    focus:ring-indigo-500
+                  "
+                >
+                  Save
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-col mx-10 mb-10">
+      <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+          <div
+            class="
+              shadow
+              overflow-hidden
+              border-b border-gray-200
+              sm:rounded-lg
+            "
+          >
+            <table
+              id="course-table"
+              class="min-w-full divide-y divide-gray-200"
+            >
+              <thead class="bg-gray-50">
+                <tr>
+                  <th
+                    scope="col"
+                    class="
+                      px-6
+                      py-3
+                      text-left text-xs
+                      font-medium
+                      text-gray-500
+                      uppercase
+                      tracking-wider
+                    "
+                  >
+                    Id
+                  </th>
+                  <th
+                    scope="col"
+                    class="
+                      px-6
+                      py-3
+                      text-left text-xs
+                      font-medium
+                      text-gray-500
+                      uppercase
+                      tracking-wider
+                    "
+                  >
+                    Course id
+                  </th>
+                  <th
+                    scope="col"
+                    class="
+                      px-6
+                      py-3
+                      text-left text-xs
+                      font-medium
+                      text-gray-500
+                      uppercase
+                      tracking-wider
+                    "
+                  >
+                    Course name
+                  </th>
+                  <th
+                    scope="col"
+                    class="
+                      px-6
+                      py-3
+                      text-left text-xs
+                      font-medium
+                      text-gray-500
+                      uppercase
+                      tracking-wider
+                    "
+                  >
+                    Progression
+                  </th>
+                  <th
+                    scope="col"
+                    class="
+                      px-6
+                      py-3
+                      text-left text-xs
+                      font-medium
+                      text-gray-500
+                      uppercase
+                      tracking-wider
+                    "
+                  >
+                    Semester
+                  </th>
+                  <th
+                    scope="col"
+                    class="
+                      px-6
+                      py-3
+                      text-left text-xs
+                      font-medium
+                      text-gray-500
+                      uppercase
+                      tracking-wider
+                    "
+                  >
+                    Syllabus
+                  </th>
+                  <th scope="col" class="relative px-6 py-3">
+                    <span class="sr-only">Edit</span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="bg-white divide-y divide-gray-200">
+                <!-- Populated from JS-->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./main.js"></script>
+  </body>
+</html>
