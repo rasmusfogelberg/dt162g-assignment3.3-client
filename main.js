@@ -38,6 +38,11 @@
       });
   }
 
+   /* 
+   * Function that will add a course to the database using 
+   * the verg POST
+   * 
+   */
   const addCourse = (course) => {
     const requestOptions = {
       method: "POST",
@@ -58,6 +63,7 @@
       .catch((error) => console.error(`${error.message}`));
   };
 
+  // If the database is empty this is rendered on the webpage
   const renderEmpty = () => courseTableBody.innerHTML = `
     <tr>
     <td class="px-6 py-4 whitespace-nowrap" colspan="7">
@@ -68,21 +74,25 @@
     </tr>
   `;
 
+  // Setting elements from the webpage
   const courseTableBody = document.querySelector('#course-table tbody');
   const addNewCourseButton = document.querySelector('#add-course');
   const addNewCourseFormWrapper = document.querySelector('#add-course-wrapper');
   const addNewCourseForm = document.querySelector('#add-course-wrapper form');
 
+  // Event listener for the add a course button to make the form visable or hidden
   addNewCourseButton.addEventListener('click', (event) => {
     event.preventDefault();
     event.target.classList.toggle('open');
     addNewCourseFormWrapper.classList.toggle('sr-only');
   });
 
+  // Event listener for the button to add a new course
   addNewCourseForm.addEventListener('submit', (event) => {
     event.preventDefault();
     new FormData(addNewCourseForm);
   });
+
 
   addNewCourseForm.addEventListener("formdata", (event) => {
     event.preventDefault();
@@ -196,6 +206,7 @@
     bindEventListeners();
   };
 
+  // Event listener for deleteing a course
   const bindEventListeners = () => {
     const deleteButtons = document.querySelectorAll('#course-table tbody button');
 
